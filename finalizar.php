@@ -93,6 +93,7 @@ unset($_SESSION['carrinho']);
   <header class="text-center">
     <div class="container d-flex justify-content-between align-items-center">
       <h2 class="m-0"><i class="bi bi-bag-check"></i> Compra Finalizada</h2>
+        <img src="logo.png" alt="Logo" style="width:240px;height:100px;">
       <div>
         <span>Olá, <strong><?php echo $_SESSION['usuario']; ?></strong></span>
         <a href="index.php" class="btn btn-light btn-sm"><i class="bi bi-shop"></i> Voltar à Loja</a>

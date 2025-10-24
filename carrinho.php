@@ -30,7 +30,7 @@ if (isset($_GET['remover'])) {
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Meu Carrinho - Loja Virtual</title>
+  <title>Meu Carrinho - Mercado D'avila</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -109,6 +109,7 @@ if (isset($_GET['remover'])) {
   <header class="text-center">
     <div class="container d-flex justify-content-between align-items-center">
       <h2 class="m-0"><i class="bi bi-cart4"></i> Meu Carrinho</h2>
+        <img src="logo.png" alt="Logo" style="width:240px;height:100px;">
       <div>
         <span>Bem-vindo, <strong><?php echo $_SESSION['usuario']; ?></strong></span>
         <a href="index.php" class="btn btn-light btn-sm"><i class="bi bi-shop"></i> Voltar à Loja</a>
@@ -168,7 +169,7 @@ if (isset($_GET['remover'])) {
   </div>
 
   <div class="footer">
-    <p>&copy; <?php echo date("Y"); ?> Minha Loja - Todos os direitos reservados.</p>
+    <p>&copy; <?php echo date("Y"); ?> Mercado D'avila - Adicione seus produtos e aproveite 😋.</p>
   </div>
 
   <!-- Bootstrap JS -->

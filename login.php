@@ -75,7 +75,8 @@
 
   <div class="login-container">
     <div class="login-card">
-      <h2><i class="bi bi-person-circle"></i> Login</h2>
+      <img src="logo.png" alt="Logo" style="width:240px;height:100px; margin-bottom:20px;">
+        <h2><i class="bi bi-person-circle"></i> Login</h2>
       <form method="post" action="login_validar.php">
         <div class="mb-3 text-start">
           <label class="form-label">Email</label>

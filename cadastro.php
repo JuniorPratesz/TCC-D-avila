@@ -75,6 +75,7 @@
 
   <div class="cadastro-container">
     <div class="cadastro-card">
+      <img src="logo.png" alt="Logo" style="width:240px;height:100px; margin-bottom:20px;">
       <h2><i class="bi bi-person-plus"></i> Cadastro</h2>
 
       <form method="post" action="cadastro_salvar.php">

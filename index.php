@@ -89,7 +89,8 @@ if (!isset($_SESSION['usuario'])) {
 
   <header class="text-center">
     <div class="container d-flex justify-content-between align-items-center">
-      <h2 class="m-0"><i class="bi bi-shop"></i> Mercado D'avila</h2>
+      <h2 class="m-0"><i class="bi bi-shop"></i> fone:(55)984272911</h2>
+        <img src="logo.png" alt="Logo" style="width:240px;height:100px;">
       <div>
         <span>Bem-vindo, <strong><?php echo $_SESSION['usuario']; ?></strong></span>
         <a href="carrinho.php" class="btn btn-light btn-sm"><i class="bi bi-cart3"></i> Ver Carrinho</a>
@@ -137,7 +138,7 @@ if (!isset($_SESSION['usuario'])) {
   </div>
 
   <div class="footer">
-    <p>&copy; <?php echo date("Y"); ?> Mercado D'avila - Melhores Preços.</p>
+    <p>&copy; <?php echo date("Y"); ?> Mercado D'avila - Melhores Preços 💲.</p>
   </div>
 
   <!-- Bootstrap JS -->
@@ -145,7 +146,7 @@ if (!isset($_SESSION['usuario'])) {
 
   <!-- Script JS -->
   <script>
-    // Animação ao clicar em "Adicionar"
+    // Animação ao clicar em "Adicionar"  
     document.querySelectorAll('.btn-laranja').forEach(btn => {
       btn.addEventListener('click', () => {
         btn.innerHTML = '<i class="bi bi-check-circle"></i> Adicionado!';
