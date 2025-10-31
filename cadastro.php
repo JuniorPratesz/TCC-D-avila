@@ -3,7 +3,9 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Cadastro - Loja Virtual</title>
+  <title>Cadastro - MERCADO D'AVILA</title>
+   <meta name="viewpord" content="with=device-width, initial-scale=1">
+  <link rel="icon" href="imagens/mc.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap 5 -->
@@ -75,7 +77,7 @@
 
   <div class="cadastro-container">
     <div class="cadastro-card">
-      <img src="logo.png" alt="Logo" style="width:240px;height:100px; margin-bottom:20px;">
+      <img src="imagens/logo.png" alt="Logo" style="width:240px;height:100px; margin-bottom:20px;">
       <h2><i class="bi bi-person-plus"></i> Cadastro</h2>
 
       <form method="post" action="cadastro_salvar.php">

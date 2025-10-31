@@ -31,6 +31,8 @@ if (isset($_GET['remover'])) {
 <head>
   <meta charset="UTF-8">
   <title>Meu Carrinho - Mercado D'avila</title>
+   <meta name="viewpord" content="with=device-width, initial-scale=1">
+  <link rel="icon" href="imagens/mc.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -109,10 +111,10 @@ if (isset($_GET['remover'])) {
   <header class="text-center">
     <div class="container d-flex justify-content-between align-items-center">
       <h2 class="m-0"><i class="bi bi-cart4"></i> Meu Carrinho</h2>
-        <img src="logo.png" alt="Logo" style="width:240px;height:100px;">
+        <img src="imagens/logo.png" alt="Logo" style="width:240px;height:100px;">
       <div>
         <span>Bem-vindo, <strong><?php echo $_SESSION['usuario']; ?></strong></span>
-        <a href="index.php" class="btn btn-light btn-sm"><i class="bi bi-shop"></i> Voltar à Loja</a>
+        <a href="index.php" class="btn btn-light btn-sm"><i class="bi bi-shop"></i> Voltar à compra</a>
         <a href="sair.php" class="btn btn-outline-light btn-sm"><i class="bi bi-box-arrow-right"></i> Sair</a>
       </div>
     </div>

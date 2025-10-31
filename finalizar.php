@@ -13,7 +13,9 @@ unset($_SESSION['carrinho']);
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Compra Finalizada - Loja Virtual</title>
+  <title>Compra Finalizada - MERCADO D'AVILA</title>
+   <meta name="viewpord" content="with=device-width, initial-scale=1">
+  <link rel="icon" href="imagens/mc.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap 5 -->
@@ -93,7 +95,7 @@ unset($_SESSION['carrinho']);
   <header class="text-center">
     <div class="container d-flex justify-content-between align-items-center">
       <h2 class="m-0"><i class="bi bi-bag-check"></i> Compra Finalizada</h2>
-        <img src="logo.png" alt="Logo" style="width:240px;height:100px;">
+        <img src="imagens/logo.png" alt="Logo" style="width:240px;height:100px;">
       <div>
         <span>Olá, <strong><?php echo $_SESSION['usuario']; ?></strong></span>
         <a href="index.php" class="btn btn-light btn-sm"><i class="bi bi-shop"></i> Voltar à Loja</a>

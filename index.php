@@ -12,7 +12,9 @@ if (!isset($_SESSION['usuario'])) {
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Loja Virtual</title>
+  <title>MERCADO D'AVILA</title>
+  <meta name="viewpord" content="with=device-width, initial-scale=1">
+  <link rel="icon" href="imagens/mc.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -90,7 +92,7 @@ if (!isset($_SESSION['usuario'])) {
   <header class="text-center">
     <div class="container d-flex justify-content-between align-items-center">
       <h2 class="m-0"><i class="bi bi-shop"></i> fone:(55)984272911</h2>
-        <img src="logo.png" alt="Logo" style="width:240px;height:100px;">
+        <img src="imagens/logo.png" alt="Logo" style="width:240px;height:100px;">
       <div>
         <span>Bem-vindo, <strong><?php echo $_SESSION['usuario']; ?></strong></span>
         <a href="carrinho.php" class="btn btn-light btn-sm"><i class="bi bi-cart3"></i> Ver Carrinho</a>
@@ -147,7 +149,7 @@ if (!isset($_SESSION['usuario'])) {
   <!-- Script JS -->
   <script>
     // Animação ao clicar em "Adicionar"  
-    document.querySelectorAll('.btn-laranja').forEach(btn => {
+    document.querySelectorAll('.btn-laranja').foreach(btn => {
       btn.addEventListener('click', () => {
         btn.innerHTML = '<i class="bi bi-check-circle"></i> Adicionado!';
         btn.classList.add('disabled');
