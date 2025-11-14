@@ -1,11 +1,6 @@
 <?php
 session_start();
-include 'conexao.php'; // deve conter a variável $conn = mysqli_connect(...)
-
-if (!isset($_SESSION['usuario'])) {
-  header("Location: login.php");
-  exit;
-}
+require 'conexao.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,13 +11,16 @@ if (!isset($_SESSION['usuario'])) {
   <meta name="viewpord" content="with=device-width, initial-scale=1">
   <link rel="icon" href="imagens/mc.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <!-- Ícones -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  
+
   <style>
     body {
       background-color: #fffaf5;
@@ -46,10 +44,6 @@ if (!isset($_SESSION['usuario'])) {
 
     header a:hover {
       text-decoration: underline;
-    }
-
-    .container {
-      margin-top: 40px;
     }
 
     .produto-card {
@@ -78,6 +72,31 @@ if (!isset($_SESSION['usuario'])) {
       color: white;
     }
 
+    .qty-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .qty-box button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background-color: #ff7b00;
+      color: white;
+      font-size: 18px;
+      border-radius: 6px;
+    }
+
+    .qty-box input {
+      width: 50px;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
     .footer {
       background-color: #ff7b00;
       color: white;
@@ -87,80 +106,102 @@ if (!isset($_SESSION['usuario'])) {
     }
   </style>
 </head>
+
 <body>
 
-  <header class="text-center">
-    <div class="container d-flex justify-content-between align-items-center">
-      <h2 class="m-0"><i class="bi bi-shop"></i> fone:(55)984272911</h2>
-        <img src="imagens/logo.png" alt="Logo" style="width:240px;height:100px;">
+<header class="text-center">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h2 class="m-0"><i class="bi bi-shop"></i> Itajaí/SC</h2>
+
+    <img src="imagens/logo.png" alt="Logo" style="width:240px;height:100px;">
+
+    <?php if (!isset($_SESSION['usuario'])) { ?>
+      <a href="login.php" class="btn btn-outline-light btn-sm">
+        <i class="bi bi-box-arrow-right"></i> Entrar
+      </a>
+    <?php } else { ?>
       <div>
-        <span>Bem-vindo, <strong><?php echo $_SESSION['usuario']; ?></strong></span>
-        <a href="carrinho.php" class="btn btn-light btn-sm"><i class="bi bi-cart3"></i> Ver Carrinho</a>
+        <span>Bem-vindo, <strong><?= $_SESSION['usuario'] ?></strong></span>
+        <a href="carrinho.php" class="btn btn-light btn-sm"><i class="bi bi-cart3"></i> Carrinho</a>
         <a href="sair.php" class="btn btn-outline-light btn-sm"><i class="bi bi-box-arrow-right"></i> Sair</a>
       </div>
-    </div>
-  </header>
+    <?php } ?>
+  </div>
+</header>
 
-  <div class="container">
-    <div class="row g-4">
-      <?php
-      // Consulta usando estilo procedural
-      $sql = "SELECT * FROM produtos";
-      $result = mysqli_query($conn, $sql);
+<div class="container mt-4">
+  <div class="row g-4">
 
-      if ($result && mysqli_num_rows($result) > 0) {
-        while ($p = mysqli_fetch_assoc($result)) {
-      ?>
-          <div class="col-md-4 col-lg-3">
-            <div class="produto-card text-center">
-              <img src="<?php echo !empty($p['imagem']) ? $p['imagem'] : 'https://via.placeholder.com/200x200?text=Produto'; ?>" 
-                   alt="<?php echo htmlspecialchars($p['nome']); ?>" 
-                   class="img-fluid rounded mb-3">
-              <h5 class="fw-bold"><?php echo htmlspecialchars($p['nome']); ?></h5>
-              <p class="text-muted mb-2">R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></p>
-              <div class="d-flex justify-content-center gap-2">
-                <a href="carrinho.php?add=<?php echo $p['id']; ?>" class="btn btn-laranja btn-sm">
-                  <i class="bi bi-plus-circle"></i> Adicionar
-                </a>
-                <a href="carrinho.php?remover=<?php echo $p['id']; ?>" class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-dash-circle"></i> Remover
-                </a>
-              </div>
+    <?php
+    $sql = "SELECT * FROM produtos";
+    $result = mysqli_query($conn, $sql);
+
+    while ($p = mysqli_fetch_assoc($result)) {
+        $estoque = isset($p['estoque']) ? intval($p['estoque']) : 0;
+    ?>
+
+      <div class="col-md-4 col-lg-3">
+        <div class="produto-card text-center">
+
+          <img src="<?= !empty($p['imagem']) ? $p['imagem'] : 'https://via.placeholder.com/200x200?text=Produto'; ?>"
+               class="img-fluid rounded mb-3">
+
+          <h5 class="fw-bold"><?= htmlspecialchars($p['nome']); ?></h5>
+          <p class="text-muted">R$ <?= number_format($p['preco'], 2, ',', '.'); ?></p>
+
+          <p class="text-secondary">
+            Estoque: <strong><?= $estoque ?></strong>
+          </p>
+
+          <?php if ($estoque > 0) { ?>
+          <form action="addProdutoCarrinho.php" method="POST">
+
+            <div class="qty-box">
+              <button type="button" class="btn-minus">-</button>
+              <input type="number" name="quantidade" value="1" min="1" max="<?= $estoque ?>" class="qty-input">
+              <button type="button" class="btn-plus">+</button>
             </div>
-          </div>
-      <?php
-        }
-      } else {
-        echo "<p class='text-center text-muted'>Nenhum produto encontrado.</p>";
-      }
 
-      mysqli_free_result($result);
-      ?>
-    </div>
+            <input type="hidden" name="id_produto" value="<?= $p['id'] ?>">
+
+            <button type="submit" class="btn btn-laranja w-100 mt-2">
+              <i class="bi bi-cart-plus"></i> Adicionar ao Carrinho
+            </button>
+          </form>
+          <?php } else { ?>
+            <p class="text-danger fw-bold">Produto Esgotado</p>
+          <?php } ?>
+
+        </div>
+      </div>
+
+    <?php } ?>
   </div>
+</div>
 
-  <div class="footer">
-    <p>&copy; <?php echo date("Y"); ?> Mercado D'avila - Melhores Preços 💲.</p>
-  </div>
+<div class="footer">
+  <p>&copy; <?= date("Y"); ?> Mercado D'avila - Melhores Preços 💲.</p>
+</div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// botões de quantidade
+document.querySelectorAll('.produto-card').forEach(card => {
+  const minus = card.querySelector('.btn-minus');
+  const plus = card.querySelector('.btn-plus');
+  const input = card.querySelector('.qty-input');
+  const max = parseInt(input.max);
 
-  <!-- Script JS -->
-  <script>
-    // Animação ao clicar em "Adicionar"  
-    document.querySelectorAll('.btn-laranja').foreach(btn => {
-      btn.addEventListener('click', () => {
-        btn.innerHTML = '<i class="bi bi-check-circle"></i> Adicionado!';
-        btn.classList.add('disabled');
-        setTimeout(() => {
-          btn.innerHTML = '<i class="bi bi-plus-circle"></i> Adicionar';
-          btn.classList.remove('disabled');
-        }, 1500);
-      });
-    });
-  </script>
+  minus.addEventListener('click', () => {
+    let v = parseInt(input.value);
+    if (v > 1) input.value = v - 1;
+  });
+
+  plus.addEventListener('click', () => {
+    let v = parseInt(input.value);
+    if (v < max) input.value = v + 1;
+  });
+});
+</script>
 
 </body>
 </html>
-
